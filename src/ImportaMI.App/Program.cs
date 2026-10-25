@@ -8,6 +8,7 @@ using ImportaMI.App.Localization;
 using ImportaMI.App.Services;
 using ImportaMI.Core;
 using ImportaMI.Core.Logging;
+using Velopack;
 
 namespace ImportaMI.App;
 
@@ -21,6 +22,9 @@ sealed class Program
     [STAThread]
     public static void Main(string[] args)
     {
+        // Deve essere la prima cosa: gestisce installazione, aggiornamento e disinstallazione e in quei casi chiude l'app.
+        VelopackApp.Build().Run();
+
         // "--lang=en" o "--lang=it" forza la lingua; senza argomento si usa quella del sistema.
         var preferred = args
             .FirstOrDefault(a => a.StartsWith(LanguageArgument, StringComparison.OrdinalIgnoreCase))?

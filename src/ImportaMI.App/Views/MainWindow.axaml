@@ -3,7 +3,7 @@
         xmlns:vm="using:ImportaMI.App.ViewModels"
         x:Class="ImportaMI.App.Views.MainWindow"
         x:DataType="vm:MainViewModel"
-        Icon="/Assets/avalonia-logo.ico"
+        Icon="/Assets/importami.ico"
         Title="ImportaMI"
         Background="{StaticResource AppBackground}"
         Width="1280" Height="820" MinWidth="960" MinHeight="640">

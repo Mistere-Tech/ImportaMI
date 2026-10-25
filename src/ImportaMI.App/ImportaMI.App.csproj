@@ -9,6 +9,13 @@
     <!-- Inglese come lingua di riserva; le altre lingue sono assembly satellite. -->
     <NeutralLanguage>en</NeutralLanguage>
     <SatelliteResourceLanguages>it</SatelliteResourceLanguages>
+    <ApplicationIcon>Assets\importami.ico</ApplicationIcon>
+    <!-- Dati di prodotto: finiscono nelle proprietà dell'exe e nell'installer. -->
+    <Version>1.0.0</Version>
+    <Product>ImportaMI</Product>
+    <Company>Mistere Tech</Company>
+    <Authors>Mistere Tech</Authors>
+    <Copyright>© 2026 Mistere Tech</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
@@ -37,6 +44,8 @@
       <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+    <!-- Installazione e aggiornamenti; la versione deve coincidere con il tool vpk in dotnet-tools.json. -->
+    <PackageReference Include="Velopack" Version="1.2.161" />
   </ItemGroup>
 
   <ItemGroup>

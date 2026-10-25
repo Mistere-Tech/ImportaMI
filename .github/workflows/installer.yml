@@ -1,0 +1,60 @@
+# Crea gli installer di ImportaMI per Windows, macOS e Linux.
+# Parte a mano (Actions > Installer > Run workflow) o con un tag di versione, es. "v1.0.1".
+# Con un tag pubblica anche una GitHub Release con i tre installer allegati.
+name: Installer
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            rid: win-x64
+          - os: macos-latest
+            rid: osx-arm64
+          - os: ubuntu-latest
+            rid: linux-x64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Crea installer
+        shell: pwsh
+        run: |
+          $version = if ('${{ github.ref_type }}' -eq 'tag') { '${{ github.ref_name }}'.TrimStart('v') } else { '' }
+          ./build/package.ps1 -Runtime ${{ matrix.rid }} -Version $version
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ImportaMI-${{ matrix.rid }}
+          path: artifacts/releases/${{ matrix.rid }}
+
+  release:
+    if: github.ref_type == 'tag'
+    needs: package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: installers
+          merge-multiple: true
+
+      - name: Pubblica la release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${{ github.ref_name }}" installers/*Setup* installers/*.AppImage \
+            --repo "${{ github.repository }}" --title "ImportaMI ${{ github.ref_name }}" --generate-notes
