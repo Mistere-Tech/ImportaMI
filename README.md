@@ -6,11 +6,13 @@
 
 <p align="center">
   <b>From the memory card to a tidy archive, one shooting session per folder.</b><br>
-  A desktop app by <a href="https://github.com/Mistere-Tech">Mistere Tech</a>
+  Free and open source, by <a href="https://github.com/Mistere-Tech">Mistere Tech</a>
 </p>
 
 <p align="center">
   <a href="https://github.com/Mistere-Tech/ImportaMI/releases/latest"><img src="https://img.shields.io/github/v/release/Mistere-Tech/ImportaMI?style=flat-square&label=download&color=F5B841" alt="Download"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-2ea44f?style=flat-square" alt="MIT License"></a>
+  <img src="https://img.shields.io/badge/free-no%20ads%20·%20no%20tracking-2ea44f?style=flat-square" alt="Free, no ads, no tracking">
   <img src="https://img.shields.io/badge/Windows%20·%20macOS%20·%20Linux-1A4752?style=flat-square" alt="Windows, macOS, Linux">
   <img src="https://img.shields.io/badge/.NET-10-512BD4?style=flat-square&logo=dotnet&logoColor=white" alt=".NET 10">
   <img src="https://img.shields.io/badge/Avalonia-12-8B44AC?style=flat-square" alt="Avalonia 12">
@@ -23,6 +25,9 @@ ImportaMI copies photos and videos from an SD card or external drive to your com
 into one folder per **shooting session**: a wedding, a carnival, a concert.
 An image-recognition model running on your computer looks at the photos and suggests a name for each folder.
 It runs on Windows, macOS and Linux. The name is Italian for "import me".
+
+ImportaMI is **free and open source** under the [MIT License](LICENSE). It is a personal, non-commercial
+project made in spare time: there is no paid version, no ads, no account, and it never sends your photos or any data anywhere.
 
 > **Status: version 1.0, in testing.** The whole flow works: scan, sessions, AI folder names, destination, verified copy,
 > report and card cleanup. It has been tested on Windows; see [Status](#status) for what still needs trying.
@@ -384,9 +389,19 @@ git tag v1.0.2
 git push origin v1.0.2
 ```
 
+## License
+
+ImportaMI is released under the [MIT License](LICENSE): you can use it, copy it, change it and share it freely,
+also for your own work, as long as you keep the copyright notice.
+
+The included Places365 model comes from the [Places365 project](https://github.com/CSAILVision/places365) by MIT CSAIL
+and keeps the terms of its authors. The other libraries listed in [Built with](#built-with) keep their own licenses.
+
+Contributions, bug reports and ideas are welcome: open an issue or a pull request.
+
 ---
 
 <p align="center">
   <img src="docs/brand/mistere-tech-512.png" alt="Mistere Tech" width="48"><br>
-  Made with care in Ascoli Piceno, Italy, by <a href="https://github.com/Mistere-Tech">Mistere Tech</a>
+  A free, non-commercial open-source project made in Ascoli Piceno, Italy, by <a href="https://github.com/Mistere-Tech">Mistere Tech</a>
 </p>

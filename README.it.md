@@ -6,11 +6,13 @@
 
 <p align="center">
   <b>Dalla scheda di memoria a un archivio in ordine, una sessione di scatto per cartella.</b><br>
-  Un'app desktop di <a href="https://github.com/Mistere-Tech">Mistere Tech</a>
+  Gratuito e open source, di <a href="https://github.com/Mistere-Tech">Mistere Tech</a>
 </p>
 
 <p align="center">
   <a href="https://github.com/Mistere-Tech/ImportaMI/releases/latest"><img src="https://img.shields.io/github/v/release/Mistere-Tech/ImportaMI?style=flat-square&label=download&color=F5B841" alt="Download"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/licenza-MIT-2ea44f?style=flat-square" alt="Licenza MIT"></a>
+  <img src="https://img.shields.io/badge/gratis-niente%20pubblicità%20·%20niente%20tracciamento-2ea44f?style=flat-square" alt="Gratis, niente pubblicità, niente tracciamento">
   <img src="https://img.shields.io/badge/Windows%20·%20macOS%20·%20Linux-1A4752?style=flat-square" alt="Windows, macOS, Linux">
   <img src="https://img.shields.io/badge/.NET-10-512BD4?style=flat-square&logo=dotnet&logoColor=white" alt=".NET 10">
   <img src="https://img.shields.io/badge/Avalonia-12-8B44AC?style=flat-square" alt="Avalonia 12">
@@ -23,6 +25,10 @@ ImportaMI copia foto e video da una scheda SD o da un disco esterno al computer 
 in una cartella per ogni **sessione di scatto**: un matrimonio, un carnevale, un concerto.
 Un modello di riconoscimento delle immagini, che gira sul tuo computer, guarda le foto e propone un nome per ogni cartella.
 Funziona su Windows, macOS e Linux.
+
+ImportaMI è **gratuito e open source** con [licenza MIT](LICENSE). È un progetto personale e senza scopo di lucro,
+fatto nel tempo libero: non esiste una versione a pagamento, non ci sono pubblicità né account, e non invia mai le tue foto
+o qualsiasi altro dato da nessuna parte.
 
 > **Stato: versione 1.0, in prova.** Tutto il flusso funziona: scansione, sessioni, nomi delle cartelle con l'AI, destinazione,
 > copia verificata, report e pulizia della scheda. È stata provata su Windows; la tabella [Stato](#stato) dice cosa resta da provare.
@@ -382,9 +388,19 @@ git tag v1.0.2
 git push origin v1.0.2
 ```
 
+## Licenza
+
+ImportaMI è distribuito con [licenza MIT](LICENSE): puoi usarlo, copiarlo, modificarlo e condividerlo liberamente,
+anche per il tuo lavoro, purché mantieni l'avviso di copyright.
+
+Il modello Places365 incluso viene dal [progetto Places365](https://github.com/CSAILVision/places365) del MIT CSAIL
+e mantiene le condizioni dei suoi autori. Le altre librerie elencate in [Tecnologie](#tecnologie) mantengono le proprie licenze.
+
+Contributi, segnalazioni di bug e idee sono benvenuti: apri una issue o una pull request.
+
 ---
 
 <p align="center">
   <img src="docs/brand/mistere-tech-512.png" alt="Mistere Tech" width="48"><br>
-  Fatto con cura ad Ascoli Piceno da <a href="https://github.com/Mistere-Tech">Mistere Tech</a>
+  Un progetto open source gratuito e senza scopo di lucro, fatto ad Ascoli Piceno da <a href="https://github.com/Mistere-Tech">Mistere Tech</a>
 </p>
