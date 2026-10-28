@@ -1,13 +1,69 @@
-# ImportaMI
+<p align="center">
+  <img src="docs/brand/importami-512.png" alt="ImportaMI" width="128">
+</p>
 
-[English](README.md) · **Italiano**
+<h1 align="center">ImportaMI</h1>
+
+<p align="center">
+  <b>Dalla scheda di memoria a un archivio in ordine, una sessione di scatto per cartella.</b><br>
+  Un'app desktop di <a href="https://github.com/Mistere-Tech">Mistere Tech</a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/Mistere-Tech/ImportaMI/releases/latest"><img src="https://img.shields.io/github/v/release/Mistere-Tech/ImportaMI?style=flat-square&label=download&color=F5B841" alt="Download"></a>
+  <img src="https://img.shields.io/badge/Windows%20·%20macOS%20·%20Linux-1A4752?style=flat-square" alt="Windows, macOS, Linux">
+  <img src="https://img.shields.io/badge/.NET-10-512BD4?style=flat-square&logo=dotnet&logoColor=white" alt=".NET 10">
+  <img src="https://img.shields.io/badge/Avalonia-12-8B44AC?style=flat-square" alt="Avalonia 12">
+  <img src="https://img.shields.io/badge/AI-sul%20dispositivo-0A1E24?style=flat-square" alt="AI sul dispositivo">
+</p>
+
+<p align="center"><a href="README.md">English</a> · <b>Italiano</b></p>
 
 ImportaMI copia foto e video da una scheda SD o da un disco esterno al computer e li archivia
 in una cartella per ogni **sessione di scatto**: un matrimonio, un carnevale, un concerto.
+Un modello di riconoscimento delle immagini, che gira sul tuo computer, guarda le foto e propone un nome per ogni cartella.
 Funziona su Windows, macOS e Linux.
 
-> **Stato: prima versione completa, in prova.** Tutto il flusso funziona: scansione, sessioni, destinazione, copia verificata,
-> report e pulizia della scheda. È stata provata su Windows; la tabella [Stato](#stato) dice cosa resta da provare.
+> **Stato: versione 1.0, in prova.** Tutto il flusso funziona: scansione, sessioni, nomi delle cartelle con l'AI, destinazione,
+> copia verificata, report e pulizia della scheda. È stata provata su Windows; la tabella [Stato](#stato) dice cosa resta da provare.
+
+<p align="center">
+  <img src="docs/screenshots/2-sessions-it.png" alt="La schermata delle sessioni, con le categorie trovate dall'AI" width="820">
+</p>
+
+## Scaricare e installare
+
+Scarica l'installer per il tuo sistema dall'[ultima release](https://github.com/Mistere-Tech/ImportaMI/releases/latest).
+Contiene tutto quello che serve all'app, compreso il modello AI: non devi installare .NET.
+
+| Sistema | File | Come si installa |
+|---|---|---|
+| Windows 10 / 11 (64 bit) | `ImportaMI-win-Setup.exe` | Avvialo. Si installa solo per il tuo utente, senza permessi di amministratore, e aggiunge ImportaMI al menu Start |
+| macOS (Apple silicon) | `ImportaMI-osx-Setup.pkg` | Aprilo e segui l'installazione |
+| Linux (x64) | `ImportaMI.AppImage` | Rendilo eseguibile con `chmod +x ImportaMI.AppImage`, poi avvialo |
+
+Gli installer non sono ancora firmati, quindi la prima volta il sistema potrebbe avvisarti:
+
+- **Windows**: se SmartScreen dice "PC protetto da Windows", clicca **Ulteriori informazioni** e poi **Esegui comunque**.
+- **macOS**: se il pacchetto "non può essere aperto", fai clic destro, scegli **Apri** e conferma.
+  Se non basta, vai in **Impostazioni di Sistema › Privacy e sicurezza** e clicca **Apri comunque**.
+
+Per disinstallare su Windows usa **Impostazioni › App**. Le tue foto non vengono mai toccate; impostazioni e report
+restano nella cartella dei dati descritta in [Dove ImportaMI tiene i suoi dati](#dove-importami-tiene-i-suoi-dati).
+
+## Primi passi
+
+1. Collega la scheda, o un disco con delle foto. Compare in **Sorgente** appena lo colleghi; cliccalo.
+   Puoi anche usare **Scegli una cartella…** per foto già sul computer.
+2. In **Sessioni** trovi una sessione per giorno. Mentre l'AI guarda le foto puoi dividere un giorno
+   in più servizi, unire una sessione alla precedente e dare un nome a ciascuna (o cliccare un nome proposto).
+3. In **Destinazione** scegli la cartella dell'archivio, i formati e la struttura delle cartelle.
+   L'anteprima a destra è esattamente quello che verrà creato sul disco.
+4. **Avvia la copia**. Ogni file viene verificato; alla fine ottieni un report.
+5. Se vuoi, **pulisci la scheda**: vengono eliminati solo i file che sono al sicuro sul computer.
+
+> Per una prima prova copia qualche foto in una cartella di test e usa **Scegli una cartella…** come sorgente:
+> la pulizia elimina davvero i file dalla sorgente.
 
 ## Cosa fa
 
@@ -89,9 +145,33 @@ Esempio:
 | ven 2 ott, 23:35 → 23:58, concerto | 1 sessione per il 2 | **Concerto** |
 | sab 3 ott, 00:20, fine del concerto | 1 sessione per il 3 | unita alla precedente |
 
-### 4. Ogni sessione riceve un nome di cartella
+### 4. L'AI propone cosa c'è nelle foto
 
-Una sessione nuova non ha nome: ImportaMI non prova a indovinare cosa c'è nelle foto. Il nome lo dai tu.
+Appena compaiono le sessioni, ImportaMI guarda ogni foto **sul tuo computer**, senza connessione a internet
+e senza inviare niente da nessuna parte. Usa [Places365](http://places2.csail.mit.edu/), un modello di riconoscimento
+delle scene (ResNet18, formato ONNX) che conosce 365 tipi di luoghi. Le sue risposte vengono raggruppate in 16 categorie
+fotografiche, e alcuni controlli visivi (colori, orario di scatto) aiutano con quelle che il modello non vede bene, come i tramonti:
+
+> Matrimonio · Festa e compleanno · Concerto · Mare e spiaggia · Montagna · Natura e paesaggi · Città e architettura ·
+> Tramonto · Ritratti · Sport · Animali · Fotografia notturna · Neve e inverno · Cibo e ristorante · Motori e auto · Macro e dettagli
+
+Il modello legge la piccola anteprima salvata dentro ogni file JPEG o RAW, quindi l'analisi è veloce anche su schede grandi.
+
+Per ogni sessione vedi:
+
+- le **categorie principali** con quante foto appartengono a ciascuna, per esempio `Natura e Paesaggi (6)` e `Tramonto (2)`;
+- un **nome di cartella consigliato**, che unisce anche due categorie quando vanno insieme (`Mare al tramonto`, `Gara motori`, `Città di notte`);
+- **Categoria non determinabile** quando nessuna categoria è abbastanza chiara: meglio nessun nome che uno sbagliato.
+
+Il suggerimento compila il nome solo se non ne hai già scritto uno tu; cliccando una categoria la usi come nome.
+Il pulsante **Avanti** aspetta che tutte le foto siano state analizzate.
+
+Puoi usare un tuo modello ONNX con gli stessi ingressi e uscite mettendolo in `models/resnet18_places365.onnx`
+nella [cartella dei dati](#dove-importami-tiene-i-suoi-dati); senza modello, ImportaMI usa solo i controlli visivi.
+
+### 5. Ogni sessione riceve un nome di cartella
+
+Il nome resta sempre tuo: l'AI lo suggerisce soltanto, e puoi cambiarlo prima della copia.
 
 - Il nome della cartella è `data + nome`, per esempio `2026-09-27 Matrimonio Bianchi`.
 - Senza nome, la cartella usa solo la data, per esempio `2026-09-27`.
@@ -117,7 +197,11 @@ Dentro ogni cartella di sessione scegli come dividere i file:
 
 I nomi delle sottocartelle seguono la lingua dell'interfaccia (`Photos` e `Videos` in inglese).
 
-### 5. Le foto che hai già vengono riconosciute
+<p align="center">
+  <img src="docs/screenshots/3-destination-it.png" alt="La schermata della destinazione con l'anteprima delle cartelle" width="820">
+</p>
+
+### 6. Le foto che hai già vengono riconosciute
 
 Subito dopo la scansione ImportaMI cerca le foto della scheda nel tuo archivio (la cartella di destinazione),
 **in qualsiasi sottocartella**, anche se sono state rinominate o se l'ultima volta avevi chiamato la sessione in un altro modo.
@@ -135,7 +219,7 @@ Una sessione già importata per intero viene segnata **Già nel tuo archivio**, 
 Una sessione importata in parte mostra quanti scatti ci sono già; quei file vengono saltati durante la copia.
 Un file con lo stesso nome ma contenuto diverso non viene mai considerato un duplicato.
 
-### 6. Scegli quali formati copiare
+### 7. Scegli quali formati copiare
 
 | Scelta | Cosa viene copiato | Cosa resta sulla scheda |
 |---|---|---|
@@ -145,7 +229,7 @@ Un file con lo stesso nome ma contenuto diverso non viene mai considerato un dup
 
 I video hanno un interruttore a parte.
 
-### 7. Copia e pulizia della scheda sono pensate per essere sicure
+### 8. Copia e pulizia della scheda sono pensate per essere sicure
 
 - Ogni file viene scritto con un nome temporaneo e rinominato solo quando il suo **checksum xxHash64** coincide con l'originale:
   una copia interrotta non lascia mai file a metà. La data originale del file viene mantenuta.
@@ -163,6 +247,10 @@ I video hanno un interruttore a parte.
 
 Le tue scelte (destinazione, formati, struttura, sottocartelle, opzioni) vengono ricordate per la volta successiva.
 
+<p align="center">
+  <img src="docs/screenshots/4-report-it.png" alt="Il report alla fine della copia" width="820">
+</p>
+
 ## Dove ImportaMI tiene i suoi dati
 
 Nella cartella di destinazione finiscono solo foto e video. Impostazioni, report e log stanno nella
@@ -179,6 +267,7 @@ cartella dei dati locali dell'utente, in una cartella `ImportaMI`:
 | `settings.json` | Le tue scelte per la prossima importazione |
 | `reports\report-aaaaMMgg-hhmmss.csv` | Uno per importazione: ogni file con esito, destinazione e checksum xxHash64 |
 | `logs\importami-aaaaMMgg.log` | Uno al giorno: scansioni, controlli dell'archivio, copie, pulizie, espulsioni ed errori. Conservati 30 giorni |
+| `models\resnet18_places365.onnx` | Facoltativo: un tuo modello AI, usato al posto di quello incluso nell'app |
 
 Si usa una cartella per utente invece di ProgramData perché esiste ed è scrivibile su tutti e tre i sistemi,
 e su un computer condiviso tiene separata la cronologia di ogni utente.
@@ -228,7 +317,10 @@ Un test fallisce se in una traduzione manca un testo o ce n'è uno in più.
 | macOS e Linux | Compilato per loro, da provare su macchine vere |
 | Orario dei file CR3 Canon senza JPEG gemello | Da verificare con schede vere |
 | Miniature | Da JPEG, PNG e WebP, e dall'anteprima interna dei RAW basati su TIFF (NEF, ARW, CR2, DNG); CR3, HEIC, TIFF e video mostrano un segnaposto |
-| Sessioni automatiche per contenuto (riconoscere un matrimonio da un carnevale) | Idea per una versione successiva: serve un modello di riconoscimento delle immagini |
+| Categorie AI e nomi di cartella consigliati (Places365) | Fatto, testato |
+| Installer per Windows, macOS e Linux | Fatto; provato quello per Windows |
+| Nomi delle categorie in inglese | Da fare: per ora sono in italiano anche nell'interfaccia inglese |
+| Divisione automatica di un giorno per contenuto (un matrimonio, poi un carnevale) | Idea per una versione successiva, a partire dalle categorie AI |
 
 Il flusso è anche nel [prototipo interattivo](docs/ui-prototype.html): scaricalo e aprilo nel browser.
 
@@ -239,22 +331,29 @@ Il flusso è anche nel [prototipo interattivo](docs/ui-prototype.html): scarical
 - CommunityToolkit.Mvvm
 - [MetadataExtractor](https://github.com/drewnoakes/metadata-extractor-dotnet) per EXIF e metadati dei video
 - System.IO.Hashing (xxHash64) per la verifica
+- [ONNX Runtime](https://onnxruntime.ai/) e SkiaSharp per l'AI sul dispositivo,
+  con il modello ResNet18 [Places365](https://github.com/CSAILVision/places365) del MIT CSAIL
+- [Velopack](https://velopack.io/) per gli installer
 - xUnit, e Avalonia Headless per i test dell'interfaccia
 
 ## Struttura del progetto
 
 | Progetto | Contenuto |
 |---|---|
-| `src/ImportaMI.Core` | Scansione, sessioni, controllo archivio, copia, pulizia e impostazioni, senza dipendenze dall'interfaccia |
+| `src/ImportaMI.Core` | Scansione, sessioni, classificazione AI, controllo archivio, copia, pulizia e impostazioni, senza dipendenze dall'interfaccia |
 | `src/ImportaMI.App` | L'app desktop Avalonia (MVVM) e le traduzioni |
 | `tests/ImportaMI.Core.Tests` | Test su file veri in cartelle temporanee: scansione, copia, duplicati, pulizia, traduzioni |
 | `tests/ImportaMI.App.Tests` | L'app vera eseguita senza finestra su una scheda simulata, nelle due lingue, lungo tutto il flusso, con uno screenshot di ogni schermata |
+| `build/package.ps1` | Crea l'installer per il sistema su cui gira |
+| `docs/brand` | Icone e loghi di ImportaMI e Mistere Tech |
 
-## Compilare e avviare
+## Compilare e avviare dai sorgenti
 
-Serve l'[SDK .NET 10](https://dotnet.microsoft.com/download).
+Servono l'[SDK .NET 10](https://dotnet.microsoft.com/download) e Git.
 
 ```bash
+git clone https://github.com/Mistere-Tech/ImportaMI.git
+cd ImportaMI
 dotnet build ImportaMI.slnx
 dotnet test
 dotnet run --project src/ImportaMI.App
@@ -264,3 +363,28 @@ dotnet run --project src/ImportaMI.App -- --lang=en
 ImportaMI copia davvero i file, e la pulizia li elimina davvero dalla scheda. Per una prima prova
 copia qualche foto in una cartella e usa **Scegli una cartella…** come sorgente.
 `dotnet test` salva gli screenshot di ogni schermata in `tests/ImportaMI.App.Tests/bin/Debug/net10.0/screenshots`.
+
+## Creare gli installer
+
+`build/package.ps1` (PowerShell 7) pubblica l'app self-contained e la impacchetta con Velopack.
+Il risultato finisce in `artifacts/releases/<runtime>`.
+
+```bash
+pwsh ./build/package.ps1
+pwsh ./build/package.ps1 -Runtime osx-arm64 -Version 1.0.2
+```
+
+Ogni installer va creato sul suo sistema. Per averli tutti e tre usa la GitHub Action **Installer**:
+avviala a mano dalla scheda Actions, oppure pubblica un tag di versione per creare anche una release con gli installer allegati.
+
+```bash
+git tag v1.0.2
+git push origin v1.0.2
+```
+
+---
+
+<p align="center">
+  <img src="docs/brand/mistere-tech-512.png" alt="Mistere Tech" width="48"><br>
+  Fatto con cura ad Ascoli Piceno da <a href="https://github.com/Mistere-Tech">Mistere Tech</a>
+</p>
