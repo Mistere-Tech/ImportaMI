@@ -69,6 +69,9 @@ stay in the data folder described in [Where ImportaMI keeps its data](#where-imp
 
 > For a first try, copy a few photos into a test folder and use **Choose a folder…** as the source:
 > the cleanup step really deletes files from the source.
+>
+> **Use ImportaMI at your own risk and always keep a backup of the photos you care about.**
+> It is free software provided "as is", without any warranty (see [License](#license)).
 
 ## What it does
 
@@ -394,8 +397,15 @@ git push origin v1.0.2
 ImportaMI is released under the [MIT License](LICENSE): you can use it, copy it, change it and share it freely,
 also for your own work, as long as you keep the copyright notice.
 
-The included Places365 model comes from the [Places365 project](https://github.com/CSAILVision/places365) by MIT CSAIL
-and keeps the terms of its authors. The other libraries listed in [Built with](#built-with) keep their own licenses.
+**No warranty.** As the license says, ImportaMI is provided "as is", without warranty of any kind,
+and the authors are not liable for any damage arising from its use, including lost or deleted files.
+Check the report before cleaning up a card, and keep a backup of your photos.
+
+The included AI model is the ResNet18 Places365 model by Bolei Zhou and MIT CSAIL
+([Places365 project](https://github.com/CSAILVision/places365)), released under the
+**Creative Commons Attribution (CC BY)** license and converted to ONNX for ImportaMI.
+Its credits and citation, together with the licenses of the libraries listed in [Built with](#built-with),
+are in [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md), which is also installed with the app.
 
 Contributions, bug reports and ideas are welcome: open an issue or a pull request.
 

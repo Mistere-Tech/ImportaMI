@@ -70,6 +70,9 @@ restano nella cartella dei dati descritta in [Dove ImportaMI tiene i suoi dati](
 
 > Per una prima prova copia qualche foto in una cartella di test e usa **Scegli una cartella…** come sorgente:
 > la pulizia elimina davvero i file dalla sorgente.
+>
+> **Usa ImportaMI a tuo rischio e tieni sempre un backup delle foto a cui tieni.**
+> È software gratuito fornito "così com'è", senza alcuna garanzia (vedi [Licenza](#licenza)).
 
 ## Cosa fa
 
@@ -393,8 +396,15 @@ git push origin v1.0.2
 ImportaMI è distribuito con [licenza MIT](LICENSE): puoi usarlo, copiarlo, modificarlo e condividerlo liberamente,
 anche per il tuo lavoro, purché mantieni l'avviso di copyright.
 
-Il modello Places365 incluso viene dal [progetto Places365](https://github.com/CSAILVision/places365) del MIT CSAIL
-e mantiene le condizioni dei suoi autori. Le altre librerie elencate in [Tecnologie](#tecnologie) mantengono le proprie licenze.
+**Nessuna garanzia.** Come dice la licenza, ImportaMI è fornito "così com'è", senza garanzie di alcun tipo,
+e gli autori non rispondono di danni derivanti dal suo uso, compresi file persi o eliminati.
+Controlla il report prima di pulire una scheda e tieni un backup delle tue foto.
+
+Il modello AI incluso è il ResNet18 Places365 di Bolei Zhou e del MIT CSAIL
+([progetto Places365](https://github.com/CSAILVision/places365)), rilasciato con licenza
+**Creative Commons Attribuzione (CC BY)** e convertito in ONNX per ImportaMI.
+Crediti e citazione, insieme alle licenze delle librerie elencate in [Tecnologie](#tecnologie),
+sono in [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md), che viene installato anche con l'app.
 
 Contributi, segnalazioni di bug e idee sono benvenuti: apri una issue o una pull request.
 
