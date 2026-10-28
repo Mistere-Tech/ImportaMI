@@ -11,7 +11,7 @@
     <SatelliteResourceLanguages>it</SatelliteResourceLanguages>
     <ApplicationIcon>Assets\importami.ico</ApplicationIcon>
     <!-- Dati di prodotto: finiscono nelle proprietà dell'exe e nell'installer. -->
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Product>ImportaMI</Product>
     <Company>Mistere Tech</Company>
     <Authors>Mistere Tech</Authors>
